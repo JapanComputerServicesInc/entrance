@@ -81,7 +81,7 @@
      * 初期表示値：表示
      */
     echo '<p>';
-    echo $this->Form->button('<span class="glyphicon glyphicon-glass"></span>　表示　', array('name' => 'display', 'class' => 'btn btn-primary btn-block'));
+    echo $this->Form->button('<span class="glyphicon glyphicon-calendar"></span>　表示　', array('name' => 'display', 'class' => 'btn btn-primary btn-block'));
     echo '</p>';
     
     

@@ -59,9 +59,11 @@ window.onload = changeDisabled;
      * 詳細画面にて行う日付の遷移(翌日及び前日)
      */
     echo '<p>';
-    echo $this->html->link('<<', array('action'=>'detail','?'=>array('selectedDay'=>$previousday,'&','select_btn'=>$select_btn)));
+    echo $this->html->link('≪', array('action'=>'detail','?'=>array('selectedDay'=>$previousday,'&','select_btn'=>$select_btn)));
+    echo '&nbsp;&nbsp;';    
     echo $displaydate."(".$w.")";
-    echo $this->html->link('>>', array('action'=>'detail','?'=>array('selectedDay'=>$nextday,'&','select_btn'=>$select_btn)));
+    echo '&nbsp;&nbsp;';    
+    echo $this->html->link('≫', array('action'=>'detail','?'=>array('selectedDay'=>$nextday,'&','select_btn'=>$select_btn)));
     echo '</p>';    
 
     /**
@@ -313,7 +315,7 @@ window.onload = changeDisabled;
      * 期表示値：保存
      */
     echo '<p style="margin-top:20px;margin-bottom:30px;">';
-    echo $this->Form->button('<span class="glyphicon glyphicon-send"></span>　保存　', array('name' => 'save', 'class' => 'btn btn-success btn-block btn-lg'));
+    echo $this->Form->button('<span class="glyphicon glyphicon-pencil"></span>　保存　', array('name' => 'save', 'class' => 'btn btn-success btn-block btn-lg'));
     echo '</p>';
     
     /**
