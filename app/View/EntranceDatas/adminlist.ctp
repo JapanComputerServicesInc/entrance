@@ -1,10 +1,6 @@
-<?php //echo $this->html->link('ログアウト', array('controller'=>'Users/','action'=>'logout')); ?>
-
 <div class="page-header">
     <h3><?php echo $title_for_layout; ?></h3>
 </div>
-
-<br>
 
 <?php
     
@@ -28,12 +24,13 @@
      * 表示する値：3年分のデータ
      * 初期表示値：$thisyear
      */  
+    echo '<p>';
     echo $this->Form->select('select1', array($year), array(
         'value' => $thisyear
         ,'empty' => false 
         ,'class'=> 'form-control'
     ));
-    echo '<p>';
+    echo '</p>';
     
     /**
      * 表示項目名：なし
@@ -60,6 +57,7 @@
             ,'value' => $thismonth
             ,'class'=> 'form-control'
     ));
+    echo '</p>';
     
     /**
      * 表示項目名：全ての日付を表示、入力されていない日付のみ表示、管理者確認がされていない日付のみ表示
@@ -70,10 +68,9 @@
     echo '<pre>';
     echo '<div class = "input radio">';
     $options = array('1' => '全ての日付を表示', '2' => '入力されていない日付のみ表示', '3' => '管理者確認がされていない日付のみ表示');
-    $attributes = array('legend' => false, 'value' => $select_btn);
+    $attributes = array('legend' => false, 'value' => $select_btn, 'class' => false, 'separator'=>'<br>');
     echo $this->Form->radio('selectbutton', $options, $attributes);
     echo '</div>';
-    echo '<p>';
     echo '</pre>';
     
     
@@ -83,8 +80,7 @@
      * 表示する値：ボタン
      * 初期表示値：表示
      */
-    //echo $this->Form->submit('表示', array('name' => 'display'));
-    echo '<p style="margin-bottom:10px;">';
+    echo '<p>';
     echo $this->Form->button('<span class="glyphicon glyphicon-glass"></span>　表示　', array('name' => 'display', 'class' => 'btn btn-primary btn-block'));
     echo '</p>';
     
@@ -92,18 +88,15 @@
     /**
      * 結果一覧の表示
      */
-    echo '<br /><br />';
-    echo "<div style='text-align:center;'>一覧";
-    echo '<br /><br />';
-    echo "<table class='table table-bordered';align='center'>";
-    echo "<tr><th><div style='text-align:center;'>日付</th>";
-    echo "<th><div style='text-align:center;'>入力状況</th>";
-    echo "<th><div style='text-align:center;'>確認状況</th></tr>";
-    //echo "<tr><th>日付</th><th>入力状況</th><th>確認状況</th></tr>";
+    echo "<div style='margin-top:30px;text-align:center;'>";
+    echo "<table class='table table-bordered table-hover'>";
+    echo "<tr>";
+    echo "<th class='active'><div class='text-center''>日付</div></th>";
+    echo "<th class='active'><div class='text-center''>入力状況</div></th>";
+    echo "<th class='active'><div class='text-center''>確認状況</div></th>";
+    echo "</tr>";
     echo $resultset;
     echo "</table>";
-   
-
     
     
     /**

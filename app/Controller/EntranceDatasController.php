@@ -273,7 +273,7 @@ class EntranceDatasController extends AppController {
 //chi
 
         //ページ名
-        $this->set('title_for_layout', '入退室情報詳細');
+        $this->set('title_for_layout', '出退情報詳細');
 
         //当日の日付を取得
         $today = date("Y-m-d");
@@ -403,7 +403,7 @@ class EntranceDatasController extends AppController {
     public function adminlist() {
 
         //ページ名
-        $this->set('title_for_layout', '入退室情報一覧');
+        $this->set('title_for_layout', '出退情報一覧');
         
         //当年・当月を取得
         $y = date('Y');

@@ -17,6 +17,8 @@ window.onload = changeDisabled;
 
 <?php
     
+    echo $this->Session->flash();
+    
     echo $this->Form->create('EntranceData', 
         array(
             'name' => 'usedKey',

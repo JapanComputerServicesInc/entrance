@@ -80,27 +80,29 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
                     
                     <li><?php echo $this->Html->link('出社情報登録', array(
                             'controller' => 'EntranceDatas',
-                                                                            'action' => 'entrance'
-                    )); ?></li>
+                            'action' => 'entrance'
+                    )); ?>
+                    </li>
                     <li><?php echo $this->Html->link('退社情報登録', array(
                             'controller' => 'EntranceDatas',
-                                                                            'action' => 'leave'
+                            'action' => 'leave'
                     )); ?>
-                    <!--この表示をログインしてるときだけ出すようにする-->
-                    <li><?php if($auth->loggedIn()) {
-                            echo $this->Html->link('一覧', array(
-                                'controller' => 'EntranceDatas', 
-                                                                                'action' => 'adminlist'
-                            ));
-                            echo '<li>';
-                            echo $this->Html->link('ログアウト', array(
-                                'controller' => 'Users', 
-                                                                                'action' => 'logout'
-                            ));
-                            echo '</li';
-                        } else {
-                            
-                        } ?></li>
+                    </li>
+                    <!--ログインしている場合のみ表示-->
+                    <?php if($auth->loggedIn()) {
+                        echo'<li>';
+                        echo $this->Html->link('出退情報一覧', array(
+                            'controller' => 'EntranceDatas', 
+                            'action' => 'adminlist'
+                        ));
+                        echo '</li>';
+                        echo '<li>';
+                        echo $this->Html->link('ログアウト', array(
+                            'controller' => 'Users', 
+                            'action' => 'logout'
+                        ));
+                        echo '</li>';
+                        } ?>
                 </ul>
             </div>
         </div>
