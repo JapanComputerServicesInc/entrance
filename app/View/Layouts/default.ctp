@@ -77,6 +77,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav">
+                    
                     <li><?php echo $this->Html->link('出社情報登録', array(
                             'controller' => 'EntranceDatas',
                                                                             'action' => 'entrance'
@@ -84,16 +85,22 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
                     <li><?php echo $this->Html->link('退社情報登録', array(
                             'controller' => 'EntranceDatas',
                                                                             'action' => 'leave'
-                    )); ?></li>
-                    <!--ログイン時だけ「ログアウト」ボタンを表示させる処理
-                    
-                    -->
-                    <li><?php echo $this->Html->link('ログアウト', array(
-                            'controller' => 'Users',
-                                                                            'action' => 'logout'
-                    )); ?></li>
-                    
-                    
+                    )); ?>
+                    <!--この表示をログインしてるときだけ出すようにする-->
+                    <li><?php if($auth->loggedIn()) {
+                            echo $this->Html->link('一覧', array(
+                                'controller' => 'EntranceDatas', 
+                                                                                'action' => 'adminlist'
+                            ));
+                            echo '<li>';
+                            echo $this->Html->link('ログアウト', array(
+                                'controller' => 'Users', 
+                                                                                'action' => 'logout'
+                            ));
+                            echo '</li';
+                        } else {
+                            
+                        } ?></li>
                 </ul>
             </div>
         </div>

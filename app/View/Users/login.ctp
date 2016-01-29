@@ -44,6 +44,3 @@
     echo $this->Form->end();
     
 ?>
-<br>
-
-<?php echo $this->Html->link('TOPページに戻る', array('controller' => 'EntranceDatas', 'action' => 'index')); ?>

@@ -14,10 +14,10 @@ window.onload = changeDisabled;
 // -->
 </script>
 
-<?php echo $this->html->link('ログアウト', array('controller'=>'Users/','action'=>'logout')); ?>
+<?php //echo $this->html->link('ログアウト', array('controller'=>'Users/','action'=>'logout')); ?>
 <br>
 
-<?php echo $this->html->link('一覧へ', array('action'=>'adminlist','?'=>array('year'=>$y,'&','month'=>$m,'&','select_btn'=>$select_btn))); ?>
+<?php //echo $this->html->link('一覧へ', array('action'=>'adminlist','?'=>array('year'=>$y,'&','month'=>$m,'&','select_btn'=>$select_btn))); ?>
 
 <div class="page-header">
     <h3><?php echo $title_for_layout; ?></h3>

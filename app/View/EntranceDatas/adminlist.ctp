@@ -1,4 +1,4 @@
-<?php echo $this->html->link('ログアウト', array('controller'=>'Users/','action'=>'logout')); ?>
+<?php //echo $this->html->link('ログアウト', array('controller'=>'Users/','action'=>'logout')); ?>
 
 <div class="page-header">
     <h3><?php echo $title_for_layout; ?></h3>

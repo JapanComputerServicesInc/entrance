@@ -4,7 +4,6 @@ App::uses('AppController', 'Controller');
 class EntranceDatasController extends AppController {
     public $scaffold;
     
-    
     /* 
      * アクション名：beforeFilter
      * 概要：login処理の設定
@@ -12,6 +11,8 @@ class EntranceDatasController extends AppController {
     public function beforeFilter(){
         //ログインしないでアクセス出来るアクションを登録する
         $this->Auth->allow('index','entrance','leave');
+        //1/29-add
+        $this->set('auth',$this->Auth);
     }
     
     
@@ -20,8 +21,7 @@ class EntranceDatasController extends AppController {
      * 概要：TOP画面の処理
      */
     public function index() {
-        
-    
+
     }
     
     

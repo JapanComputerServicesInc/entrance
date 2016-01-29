@@ -8,7 +8,7 @@ class UsersController extends AppController {
     public function beforeFilter(){
         //ログインしないでアクセス出来るアクションを登録する
         $this->Auth->allow('login','add');
-        
+        $this->set('auth',$this->Auth);
     }
     
     
