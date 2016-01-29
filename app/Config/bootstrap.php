@@ -111,3 +111,24 @@ CakeLog::config('error', array(
 ));
 
 CakePlugin::load('BoostCake');
+
+//cakePDF
+CakePlugin::load('CakePdf', array('bootstrap' => true, 'routes' => true));
+
+Configure::write('CakePdf', array(
+    'engine' => 'CakePdf.WkHtmlToPdf', // 使用するPDFエンジン
+    'binary' => '/usr/local/bin/wkhtmltopdf', // WkHtmlToPdfバイナリファイルのパス
+    'options' => array(
+        'print-media-type' => false,
+        'outline' => true,
+        'dpi' => 96
+    ),
+    'margin' => array(
+        'bottom' => 5,
+        'left' => 5,
+        'right' => 5,
+        'top' => 5
+    ),
+    'orientation' => 'portrait', // landscape（横）指定もできる
+    'download' => true // 表示のみ(false)かダウンロード(true)か
+));

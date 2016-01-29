@@ -1,5 +1,9 @@
 <?php echo $this->html->link('ログアウト', array('controller'=>'Users/','action'=>'logout')); ?>
-<h1>一覧画面</h1>
+
+<div class="page-header">
+    <h3><?php echo $title_for_layout; ?></h3>
+</div>
+
 <br>
 
 <?php
@@ -27,14 +31,17 @@
     echo $this->Form->select('select1', array($year), array(
         'value' => $thisyear
         ,'empty' => false 
+        ,'class'=> 'form-control'
     ));
-   
+    echo '<p>';
+    
     /**
      * 表示項目名：なし
      * DB項目名　：なし
      * 表示する値：12ヶ月分のデータ
      * 初期表示値：$thismonth
      */
+    echo '<p>';
     echo $this->Form->select('select2',array(
              "01" => '1月'
             ,"02" => '2月'
@@ -51,7 +58,8 @@
         ),array(
             'empty' => false
             ,'value' => $thismonth
-    ))."<br /><br />";
+            ,'class'=> 'form-control'
+    ));
     
     /**
      * 表示項目名：全ての日付を表示、入力されていない日付のみ表示、管理者確認がされていない日付のみ表示
@@ -59,10 +67,15 @@
      * 表示する値：ラジオボタン
      * 初期表示値：全ての日付を表示
      */
+    echo '<pre>';
+    echo '<div class = "input radio">';
     $options = array('1' => '全ての日付を表示', '2' => '入力されていない日付のみ表示', '3' => '管理者確認がされていない日付のみ表示');
-    $attributes = array('legend' => false, 'separator' => '<br>', 'value' => $select_btn);
+    $attributes = array('legend' => false, 'value' => $select_btn);
     echo $this->Form->radio('selectbutton', $options, $attributes);
-    echo "<br /><br />";
+    echo '</div>';
+    echo '<p>';
+    echo '</pre>';
+    
     
     /**
      * 表示項目名：表示
@@ -70,24 +83,28 @@
      * 表示する値：ボタン
      * 初期表示値：表示
      */
-    echo $this->Form->submit('表示', array('name' => 'display'))."<br /><br />";
+    //echo $this->Form->submit('表示', array('name' => 'display'));
+    echo '<p style="margin-bottom:10px;">';
+    echo $this->Form->button('<span class="glyphicon glyphicon-glass"></span>　表示　', array('name' => 'display', 'class' => 'btn btn-primary btn-block'));
+    echo '</p>';
+    
     
     /**
      * 結果一覧の表示
      */
-    echo "一覧<br /><br />";
-    echo "<table><tr><th>日付</th><th>入力状況</th><th>確認状況</th></tr>";
+    echo '<br /><br />';
+    echo "<div style='text-align:center;'>一覧";
+    echo '<br /><br />';
+    echo "<table class='table table-bordered';align='center'>";
+    echo "<tr><th><div style='text-align:center;'>日付</th>";
+    echo "<th><div style='text-align:center;'>入力状況</th>";
+    echo "<th><div style='text-align:center;'>確認状況</th></tr>";
+    //echo "<tr><th>日付</th><th>入力状況</th><th>確認状況</th></tr>";
     echo $resultset;
     echo "</table>";
+   
+
     
-    /**
-     * 表示項目名：TOPページに戻る
-     * DB項目名　：なし
-     * 表示する値：リンク
-     * 初期表示値：TOPページに戻る
-     */ 
-    echo'<br>';
-    echo $this->Html->link('TOPページに戻る', array('controller' => 'EntranceDatas', 'action' => 'index'));
     
     /**
      * FormHelperの終了
