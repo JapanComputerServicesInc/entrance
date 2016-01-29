@@ -1,10 +1,7 @@
-<div class="page-header">
-    <h3><?php echo $title_for_layout; ?></h3>
-</div>
+<h1>出社情報登録</h1>
+<br>
 
 <?php
-    
-    echo $this->Session->flash();
     
     /**
      * FormHelperの宣言
@@ -12,8 +9,7 @@
     echo $this->Form->create('EntranceData', array(
         'inputDefaults' => array(
         'disabled'=>$managerCheck
-        ,'class'=> 'form-control'
-        ),
+        )
     ));
     
     /**
@@ -30,14 +26,11 @@
      * 表示する値：7日分のデータ
      * 初期表示値：$selectedDay
      */
-    echo '<p>';
     echo $this->Form->select('RECORD_DATE', array($week),array(
         'value' => $selectedDay 
         ,'empty' => false 
         ,'onChange'=>'this.form.submit()'
-        ,'class'=> 'form-control'
     ));
-    echo '</p>';
     
     /**
      * 表示項目名：出社時間
@@ -45,14 +38,12 @@
      * 表示する値：時間(24時間形式)
      * 初期表示値：08:00
      */
-    echo '<p>';
     echo $this->Form->input('ENT_TIME', array(
         'type' => 'time'
-        ,'label' => '出社時間'
+        ,'label' => "<br />".'出社時間：'."<br />"
         ,'timeFormat' => '24' 
         ,'selected' => $enttime
     ));
-    echo '</p>';
     
     /**
      * 表示項目名：最初に出社した人
@@ -60,15 +51,13 @@
      * 表示する値：テキストボックス
      * 初期表示値：空白
      */
-    echo '<p>';
     echo $this->Form->input('ENT_NAME', array(
         'type' => 'textbox' 
-        ,'label' => '最初に出社した人'
+        ,'label' => "<br />".'最初に出社した人：'."<br />"
         ,'required' => false
         ,'default' => ''
         ,'maxLength' => 40
     ));
-    echo '</p>';
     
     /**
      * 表示項目名：コメント(気がついたこと)
@@ -76,15 +65,13 @@
      * 表示する値：テキストエリア
      * 初期表示値：空白
      */
-    echo '<p>';
     echo $this->Form->input('ENT_COMMENT', array(
         'type'=>'textarea', 
-        'label'=>'コメント(気がついたこと)' 
+        'label'=>"<br />".'コメント(気がついたこと)：'."<br />" 
         ,'default' => ''
         ,'maxLength' => 400
         ,'required' => false
-    ));
-    echo '</p>';
+    ))."<br />";
     
     /**
      * 表示項目名：保存
@@ -92,14 +79,19 @@
      * 表示する値：ボタン
      * 初期表示値：保存
      */
-    echo '<p style="margin-bottom:30px;">';
-    echo $this->Form->button('<span class="glyphicon glyphicon-send"></span>　保存　', array('name' => 'save', 'class' => 'btn btn-success btn-block btn-lg',  'disabled'=>$managerCheck));
-    echo '</p>';
-
+    echo $this->Form->submit('　保　存　', array('name' => 'save', 'disabled'=>$managerCheck))."<br />";
+    
+    /**
+     * 表示項目名：TOPページに戻る
+     * DB項目名　：なし
+     * 表示する値：リンク
+     * 初期表示値：TOPページに戻る
+     */
+    echo $this->Html->link('TOPページに戻る', array('controller' => 'EntranceDatas', 'action' => 'index'));
+    
     /**
      * FormHelperの終了
      */
     echo $this->Form->end(); 
-   
     
 ?>
