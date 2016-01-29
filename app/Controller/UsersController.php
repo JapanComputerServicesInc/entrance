@@ -59,8 +59,11 @@ class UsersController extends AppController {
                 //エラー文言を表示
                 
                 //メッセージの表示を変える
-                
-                $this->Session->setFlash('ユーザー名かパスワードが違います。'."<br />");
+                //エラーメッセージを表示
+                $this->Session->setFlash(__('ユーザー名かパスワードが違います。'), 'alert', array(
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-danger'
+                ));
             }
         }
     }
