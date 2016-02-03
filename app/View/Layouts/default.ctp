@@ -88,7 +88,8 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
                     )); ?>
                     </li>
                     <!--ログインしている場合のみ表示-->
-                    <?php if($auth->loggedIn()) {
+                    <?php 
+                    if($auth->loggedIn()) {
                         echo'<li>';
                         echo $this->Html->link('出退情報一覧', array(
                             'controller' => 'EntranceDatas', 

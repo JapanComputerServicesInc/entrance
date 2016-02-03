@@ -37,7 +37,7 @@ class AppController extends Controller {
         //ログイン機能を利用する設定
         'Auth' => array(
             //ログイン後の移動先
-            'loginRedirect' => array('controller' => 'Entrancedatas', 'action' => 'adminlist'),
+            'loginRedirect' => array('controller' => 'EntranceDatas', 'action' => 'adminlist'),
             //ログアウト後の移動先
             'logoutRedirect' => array('controller' => 'Users', 'action' => 'login'),
             //ログインページのパス

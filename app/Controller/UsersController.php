@@ -11,7 +11,6 @@ class UsersController extends AppController {
         $this->set('auth',$this->Auth);
     }
     
-    
     /* 
      * アクション名：add
      * 概要：新規ユーザー登録処理
@@ -50,10 +49,10 @@ class UsersController extends AppController {
             
             //ログイン成功なら
             if($this->Auth->login()){
+
+                //一覧ページへ移動
+               return $this->redirect(array('controller' => 'EntranceDatas', 'action' => 'adminlist'));
                 
-                //Auth指定のログインページへ移動
-                $this->redirect($this->Auth->redirect());
-            
             //ログイン失敗なら
             }else{
                 //エラー文言を表示
@@ -75,18 +74,14 @@ class UsersController extends AppController {
      */
     public function logout(){
         
-        //ページ名
-        //$this->set('title_for_layout', '出社情報登録');
-        
-        $this->Auth->logout();
-        //ログアウトメッセージの表示変更
+        //ログアウトメッセージの表示
         $this->Session->setFlash(__('ログアウトしました。'), 'alert', array(
             'plugin' => 'BoostCake',
-            'class' => 'alert-primary'
+            'class' => 'alert-info'
         ));
-        //$this->Session->setFlash('*～*～*～*～*～*～*'."<br />".'　ログアウトしました。'."<br />".'*～*～*～*～*～*～*');
-        //Auth指定のログアウト後のページへ移動
-        $this->redirect($this->Auth->redirect());
-        
+
+        //ログアウトし、Auth指定のログアウト後のページへ移動
+        $this->redirect($this->Auth->logout());
         }   
-}
+        
+    }
