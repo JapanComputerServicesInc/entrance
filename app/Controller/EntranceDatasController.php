@@ -487,7 +487,6 @@ class EntranceDatasController extends AppController {
                 ,'LEAVE_AIRCON' => '1'
                 ,'LEAVE_SEAIRCON' => '1'
                 ,'LEAVE_LIGHT' => '1'
-                ,'LEAVE_KEY' => '1'
             );
             
             //上記で設定した条件で検索を行う
