@@ -3,3 +3,10 @@
 	RewriteRule ^$ app/webroot/ [L]
 	RewriteRule (.*) app/webroot/$1 [L]
 </IfModule>
+php_value default_charset UTF-8
+php_value mbstring.input_encoding none
+php_value mbstring.internal_encoding UTF-8
+php_value mbstring.output_encoding UTF-8
+php_value mbstring.language Japanese
+php_flag mbstring.encoding_translation On
+php_value mbstring.substitute_character none
