@@ -104,13 +104,12 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 //                            'action' => '新規ユーザー登録'
 //                        ));
 //                        echo '</li>';
-                        
-                        echo '<li>';
-                        echo $this->Html->link('パスワード変更', array(
-                            'controller' => 'Users', 
-                            'action' => 'password'
-                        ));
-                        echo '</li>';
+//                        echo '<li>';
+//                        echo $this->Html->link('パスワード変更', array(
+//                            'controller' => 'Users', 
+//                            'action' => 'password'
+//                        ));
+//                        echo '</li>';
 
                         echo '<li>';
                         echo $this->Html->link('ログアウト', array(

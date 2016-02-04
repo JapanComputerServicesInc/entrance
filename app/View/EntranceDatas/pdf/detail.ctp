@@ -10,40 +10,16 @@
         array(
             'name'=>'usedKey'
             ,'inputDefaults' => array(
-            'class' => 'form-control'
+//            'class' => 'form-control'
             )
         )
     );
     
     /**
-     * 表示項目名：なし
-     * DB項目名　：ID
-     * 表示する値：なし
-     * 初期表示値：なし
-     */
-    echo $this->Form->input('ID');
-    
-    /**
-     * 表示項目名：なし
-     * DB項目名　：RECORD_DATE
-     * 表示する値：なし
-     * 初期表示値：なし
-     */
-    echo $this->Form->hidden('RECORD_DATE' ,
-        array(
-            'value' => $selectedDay
-            )
-    );
-
-    /**
      * 詳細画面にて行う日付の遷移(翌日及び前日)
      */
     echo '<p>';
-    echo $this->html->link('≪', array('action'=>'detail','?'=>array('selectedDay'=>$previousday,'&','select_btn'=>$select_btn)));
-    echo '&nbsp;&nbsp;';    
     echo $displaydate."(".$w.")";
-    echo '&nbsp;&nbsp;';    
-    echo $this->html->link('≫', array('action'=>'detail','?'=>array('selectedDay'=>$nextday,'&','select_btn'=>$select_btn)));
     echo '</p>';    
 
     /**
@@ -129,13 +105,7 @@
     echo '</p>'; 
     
     echo '<p>';
-    echo '<label>チェック項目&nbsp;&nbsp;</label>';
-    
-    echo $this->Form->button('全て選択', array(
-        'type' => 'button'
-       ,'id' => 'all_check'
-       ,'class' => 'btn btn-primary '
-    ));
+    echo '<label>チェック項目</label>';
     echo '</p>'; 
     
     /**
@@ -286,16 +256,6 @@
         ,'default' => ''
         ,'class' => ''
     ));
-    echo '</p>';
-    
-    /**
-     * 表示項目名：保存
-     * DB項目名　：なし
-     * 表示する値：ボタン
-     * 期表示値：保存
-     */
-    echo '<p style="margin-top:20px;margin-bottom:30px;">';
-    echo $this->Form->button('<span class="glyphicon glyphicon-pencil"></span>　保存　', array('name' => 'save', 'class' => 'btn btn-success btn-block btn-lg'));
     echo '</p>';
     
     /**
