@@ -95,16 +95,11 @@ class EntranceDatasController extends AppController {
         }
         
         //管理者チェックの有無を確認し、完了していれば編集不可、未完了であれば編集可にする
-        $managerCheck = $this->_checkManagerCheck($selectedDay);
-        
-        If ($managerCheck) {
-            //管理者チェック済みの場合、注記を表示
-            $this->Session->setFlash(__('管理者確認済みのため、データを変更することはできません。'), 'alert', array(
-                'plugin' => 'BoostCake',
-                'class' => 'alert-info'
-            ));
-        }
+        $editFlg = $this->_checkManagerCheck($selectedDay);
 
+        //本番サーバーの場合、アクセス元がJCS本社でなければ編集不可とする
+        $editFlg = $this->_checkServerIP();
+        
         //エラーフラグが0の場合(バリデーションエラーが発生した場合、エラーフラグは1になる)
         //(バリデーションエラーの場合は、DBのデータではなくリクエストデータを表示させるため、以下のDB読み込みを行わない)
         If ($errFlg == '0'){
@@ -126,7 +121,7 @@ class EntranceDatasController extends AppController {
         //ビューで使用する変数をセットする
         $this->set('selectedDay', $selectedDay);   
         $this->set('enttime', $enttime);   
-        $this->set('managerCheck', $managerCheck);
+        $this->set('editFlg', $editFlg);
     
     }
     
@@ -197,15 +192,10 @@ class EntranceDatasController extends AppController {
         }
         
         //管理者チェックの有無を確認し、完了していれば編集不可、未完了であれば編集可にする
-        $managerCheck = $this->_checkManagerCheck($selectedDay);
-        
-        If ($managerCheck) {
-            //管理者チェック済みの場合、注記を表示
-            $this->Session->setFlash(__('管理者確認済みのため、データを変更することはできません。'), 'alert', array(
-                'plugin' => 'BoostCake',
-                'class' => 'alert-info'
-            ));
-        }
+        $editFlg = $this->_checkManagerCheck($selectedDay);
+
+        //本番サーバーの場合、アクセス元がJCS本社でなければ編集不可とする
+        $editFlg = $this->_checkServerIP();
         
         //エラーフラグが0の場合(バリデーションエラーが発生した場合、エラーフラグは1になる)
         //(バリデーションエラーの場合は、DBのデータではなくリクエストデータを表示させるため、以下のDB読み込みを行わない)
@@ -227,7 +217,7 @@ class EntranceDatasController extends AppController {
         //ビューで使用する変数をセットする
         $this->set('selectedDay', $selectedDay);   
         $this->set('leavetime', $leavetime);
-        $this->set('managerCheck', $managerCheck);
+        $this->set('editFlg', $editFlg);
         
     }
     
@@ -251,6 +241,14 @@ class EntranceDatasController extends AppController {
         If($this->EntranceData->find('all',array('conditions' => $opt))) { 
             //データが存在する場合（管理者チェックが完了していれば）チェックが完了していれば情報の編集は不可能
             $managerCheck = true;
+
+            //エラー文言を表示する
+            $this->Session->setFlash(__('管理者確認済みのため、データを変更することはできません。'), 'alert', array(
+                'plugin' => 'BoostCake',
+                'class' => 'alert-info'
+            ));
+
+
             
         } else {
             //データが存在しない場合(管理者チェックが完了していない場合)チェックが完了していない場合は情報の編集が可能
@@ -258,6 +256,30 @@ class EntranceDatasController extends AppController {
         }
         
         return $managerCheck;
+    
+    }
+    
+    
+    /* 関数名：_checkServerIP
+     * 概要：本番サーバーの場合、アクセス元がJCS本社でなければ編集不可とする
+     * 引数：なし
+     * 戻り値：True(編集不可)/False(編集可)
+     */
+    public function _checkServerIP() {
+
+        $editFlg = false;
+        
+        If ($_SERVER['SERVER_NAME'] == HONBAN_URL) {
+            if (!($_SERVER["REMOTE_ADDR"] == JCS_IP)) {
+                $editFlg = true;
+                $this->Session->setFlash(__('JCS本社からの接続ではないため、データの変更はできません。'), 'alert', array(
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-warning'
+                ));
+            }
+        }
+        
+        return $editFlg;
     
     }
     

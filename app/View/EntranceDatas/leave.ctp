@@ -23,7 +23,7 @@ window.onload = changeDisabled;
         array(
             'name' => 'usedKey',
             'inputDefaults' => array(
-                'disabled' => $managerCheck
+                'disabled' => $editFlg
                 ,'class' => 'form-control'
             )
         )
@@ -90,7 +90,7 @@ window.onload = changeDisabled;
     echo $this->Form->button('全て選択', array(
         'type' => 'button'
        ,'id' => 'all_check'
-       ,'disabled'=>$managerCheck 
+       ,'disabled'=>$editFlg 
        ,'class' => 'btn btn-primary '
     ));
     echo '</p>';    
@@ -210,7 +210,7 @@ window.onload = changeDisabled;
     $options = array('1' => '最終退室用', '2' => '自分用', '3' => 'その他');
     $attributes = array('legend' => false 
                         ,'onClick' => 'changeDisabled()', 'default' => 1,'class' => false, 'separator'=>'<br>'
-                        ,'required' => false, 'disabled'=>$managerCheck);
+                        ,'required' => false, 'disabled'=>$editFlg);
     echo $this->Form->radio('LEAVE_KEY', $options, $attributes);
     echo $this->Form->error('LEAVE_KEY', '必ず選択してください。');
     echo '</div>';
@@ -246,7 +246,7 @@ window.onload = changeDisabled;
      */
  
     echo '<p style="margin-bottom:30px;">';
-    echo $this->Form->button('<span class="glyphicon glyphicon-pencil"></span>　保存　', array('name' => 'save', 'class' => 'btn btn-success btn-block btn-lg',  'disabled'=>$managerCheck));
+    echo $this->Form->button('<span class="glyphicon glyphicon-pencil"></span>　保存　', array('name' => 'save', 'class' => 'btn btn-success btn-block btn-lg',  'disabled'=>$editFlg));
     echo '</p>';
 
     /**

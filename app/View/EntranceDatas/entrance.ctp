@@ -11,7 +11,7 @@
      */
     echo $this->Form->create('EntranceData', array(
         'inputDefaults' => array(
-        'disabled'=>$managerCheck
+        'disabled'=>$editFlg
         ,'class'=> 'form-control'
         ),
     ));
@@ -93,7 +93,7 @@
      * 初期表示値：保存
      */
     echo '<p style="margin-bottom:30px;">';
-    echo $this->Form->button('<span class="glyphicon glyphicon-pencil"></span>　保存　', array('name' => 'save', 'class' => 'btn btn-success btn-block btn-lg',  'disabled'=>$managerCheck));
+    echo $this->Form->button('<span class="glyphicon glyphicon-pencil"></span>　保存　', array('name' => 'save', 'class' => 'btn btn-success btn-block btn-lg',  'disabled'=>$editFlg));
     echo '</p>';
 
     /**
