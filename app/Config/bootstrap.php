@@ -110,11 +110,14 @@ CakeLog::config('error', array(
 	'file' => 'error',
 ));
 
+//CONSTファイルの読み込み
+Configure::load( 'const' );
+
+//プラグイン：boostcakeの読み込み
 CakePlugin::load('BoostCake');
 
-//cakePDF
+//プラグイン：cakePDFの読み込みと設定
 CakePlugin::load('CakePdf', array('bootstrap' => true, 'routes' => true));
-
 Configure::write('CakePdf', array(
     'engine' => 'CakePdf.WkHtmlToPdf', // 使用するPDFエンジン
     'binary' => '/usr/local/bin/wkhtmltopdf', // WkHtmlToPdfバイナリファイルのパス

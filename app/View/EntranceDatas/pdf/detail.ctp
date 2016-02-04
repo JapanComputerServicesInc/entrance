@@ -1,33 +1,20 @@
-<!DOCTYPE html>
-<?php echo $this->Html->script( '//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'); ?>
-<?php echo $this->Html->script('changeDisabled.js'); ?>
-<?php echo $this->Html->script('checkAll.js'); ?>
-
-<script type="text/javascript">
-<!--
-// ページを表示したとき、changeDisabled() を呼び出す
-//※退社情報登録画面にアクセスした時、「その他」が選択されていたらテキストを入力出来るようにする為
-window.onload = changeDisabled;
-
-// -->
-</script>
-
-<?php echo $this->html->link('ログアウト', array('controller'=>'Users/','action'=>'logout')); ?>
-<br>
-
-<?php echo $this->html->link('一覧へ', array('action'=>'adminlist','?'=>array('year'=>$y,'&','month'=>$m,'&','select_btn'=>$select_btn))); ?>
-
-
-<h1>詳細画面</h1>
-<br>
-
+<div class="page-header">
+    <h3><?php echo $title_for_layout; ?></h3>
+</div>
 <?php
-    
+        
     /**
      * FormHelperの宣言
      */
-    echo $this->Form->create('EntranceData', array("name"=>"usedKey"));
-
+    echo $this->Form->create('EntranceData', 
+        array(
+            'name'=>'usedKey'
+            ,'inputDefaults' => array(
+            'class' => 'form-control'
+            )
+        )
+    );
+    
     /**
      * 表示項目名：なし
      * DB項目名　：ID
@@ -39,30 +26,42 @@ window.onload = changeDisabled;
     /**
      * 表示項目名：なし
      * DB項目名　：RECORD_DATE
-     * 表示する値：7日分のデータ
-     * 初期表示値：$selectedDay
+     * 表示する値：なし
+     * 初期表示値：なし
      */
-    echo $this->Form->hidden('RECORD_DATE' ,array('value' => $selectedDay));
-    
+    echo $this->Form->hidden('RECORD_DATE' ,
+        array(
+            'value' => $selectedDay
+            )
+    );
+
     /**
      * 詳細画面にて行う日付の遷移(翌日及び前日)
      */
-    echo $this->html->link('<<', array('action'=>'detail','?'=>array('selectedDay'=>$previousday,'&','select_btn'=>$select_btn)));
+    echo '<p>';
+    echo $this->html->link('≪', array('action'=>'detail','?'=>array('selectedDay'=>$previousday,'&','select_btn'=>$select_btn)));
+    echo '&nbsp;&nbsp;';    
     echo $displaydate."(".$w.")";
-    echo $this->html->link('>>', array('action'=>'detail','?'=>array('selectedDay'=>$nextday,'&','select_btn'=>$select_btn)));
-    
+    echo '&nbsp;&nbsp;';    
+    echo $this->html->link('≫', array('action'=>'detail','?'=>array('selectedDay'=>$nextday,'&','select_btn'=>$select_btn)));
+    echo '</p>';    
+
     /**
      * 表示項目名：出社時間
      * DB項目名　：ENT_TIME
      * 表示する値：時間(24時間形式)
      * 初期表示値：08:00
      */
+    echo "<div class='form-inline'>";
+    echo '<p>';
     echo $this->Form->input('ENT_TIME', array(
         'type' => 'time'
-        ,'label' => "<br />".'出社時間：'."<br />"
+        ,'label' => '出社時間'
         ,'timeFormat' => '24' 
         ,'selected' => $enttime
     ));
+    echo '</p>';
+    echo '</div>';
     
     /**
      * 表示項目名：最初に出社した人
@@ -70,13 +69,15 @@ window.onload = changeDisabled;
      * 表示する値：テキストボックス
      * 初期表示値：空白
      */
+    echo '<p>';
     echo $this->Form->input('ENT_NAME', array(
         'type' => 'textbox' 
-        ,'label' => "<br />".'最初に出社した人：'."<br />"
+        ,'label' => '最初に出社した人：'
         ,'required' => false
         ,'default' => ''
         ,'maxLength' => 40
     ));
+    echo '</p>';
     
     /**
      * 表示項目名：コメント(気がついたこと)
@@ -84,13 +85,15 @@ window.onload = changeDisabled;
      * 表示する値：テキストエリア
      * 初期表示値：空白
      */
+    echo '<p>';
     echo $this->Form->input('ENT_COMMENT', array(
         'type'=>'textarea', 
-        'label'=>"<br />".'コメント(気がついたこと)：'."<br />" 
+        'label'=>'コメント(気がついたこと)：' 
         ,'default' => ''
         ,'maxLength' => 400
         ,'required' => false
-    ))."<br />";
+    ));
+    echo '</p>';
     
     /**
      * 表示項目名：退社時間
@@ -98,12 +101,16 @@ window.onload = changeDisabled;
      * 表示する値：時間(24時間形式)
      * 初期表示値：20:00
      */
+    echo "<div class='form-inline'>";
+    echo '<p>';
     echo $this->Form->input('LEAVE_TIME', array(
-        'type' => 'time' 
-        ,'label' => "<br />".'退社時間：' 
-        ,'timeFormat' => '24'
+        'type' => 'time'
+        ,'label' => '退社時間'
+        ,'timeFormat' => '24' 
         ,'selected' => $leavetime
     ));
+    echo '</p>';
+    echo '</div>';
     
     /**
      * 表示項目名：最後に退社した人
@@ -111,20 +118,25 @@ window.onload = changeDisabled;
      * 表示する値：テキストボックス
      * 初期表示値：空白
      */
+    echo '<p>';
     echo $this->Form->input('LEAVE_NAME', array(
         'type' => 'textbox' 
-        ,'label' => "<br />".'最後に退社した人：'."<br />" 
+        ,'label' => '最後に退社した人' 
         ,'required' => false 
         ,'default' => ''
         ,'maxLength' => 40
-    ))."<br />";
+    ));
+    echo '</p>'; 
     
-    echo '■チェック項目';
+    echo '<p>';
+    echo '<label>チェック項目&nbsp;&nbsp;</label>';
     
-    /**
-     * JQueryで設定したアクションを実行する為のボタン
-     */
-    echo $this->Form->button('全て選択', array('type' => 'button','id' => 'all_check')); 
+    echo $this->Form->button('全て選択', array(
+        'type' => 'button'
+       ,'id' => 'all_check'
+       ,'class' => 'btn btn-primary '
+    ));
+    echo '</p>'; 
     
     /**
      * 表示項目名：クリアデスク
@@ -228,9 +240,7 @@ window.onload = changeDisabled;
         ,'label' => '全室内の消灯'
         ,'default' => ''
         ,'class' => 'leavecheck'
-    ))."<br />";
-    
-    echo '■使用した鍵'."<br />";
+    ));
     
     /**
      * 表示項目名：自分用、最終退室用、その他
@@ -238,12 +248,15 @@ window.onload = changeDisabled;
      * 表示する値：ラジオボタン
      * 初期表示値：(1)最終退室用
      */
+    echo '<p style="margin-top:15px;"><label>使用した鍵</label>';
+    echo '<div class = "input radio">';
     $options = array('1' => '最終退室用', '2' => '自分用', '3' => 'その他');
-    $attributes = array('legend' => false, 'separator' => '<br>' 
-                        ,'onClick' => 'changeDisabled()', 'default' => 1
+    $attributes = array('legend' => false , 'onClick' => 'changeDisabled()' 
+                        ,'default' => 1, 'class' => false, 'separator'=>'<br>'
                         ,'required' => false);
     echo $this->Form->radio('LEAVE_KEY', $options, $attributes);
     echo $this->Form->error('LEAVE_KEY', '必ず選択してください。');
+    echo '</div>';
     
     /**
      * 表示項目名：なし
@@ -257,7 +270,8 @@ window.onload = changeDisabled;
         ,'disabled'=>true
         ,'required' => false
         ,'maxLength' => 100
-    ))."<br />";
+    ));
+    echo '</p>';
     
     /**
      * 表示項目名：管理者チェック
@@ -265,11 +279,14 @@ window.onload = changeDisabled;
      * 表示する値：チェックボックス
      * 初期表示値：空白
      */
+    echo '<p style="margin-top:20px;">';
     echo $this->Form->input('MANAGER_CHECK', array(
         'type' => 'checkbox'
-        ,'label' => '個人情報管理者(筆頭)による確認'."<br /><br />"
+        ,'label' => '個人情報管理者(筆頭)による確認'
         ,'default' => ''
+        ,'class' => ''
     ));
+    echo '</p>';
     
     /**
      * 表示項目名：保存
@@ -277,15 +294,9 @@ window.onload = changeDisabled;
      * 表示する値：ボタン
      * 期表示値：保存
      */
-    echo $this->Form->submit('　保　存　', array('name' => 'save'))."<br />";
-    
-    /**
-     * 表示項目名：TOPページに戻る
-     * DB項目名　：なし
-     * 表示する値：リンク
-     * 初期表示値：TOPページに戻る
-     */ 
-    echo $this->Html->link('TOPページに戻る', array('controller' => 'EntranceDatas', 'action' => 'index'));
+    echo '<p style="margin-top:20px;margin-bottom:30px;">';
+    echo $this->Form->button('<span class="glyphicon glyphicon-pencil"></span>　保存　', array('name' => 'save', 'class' => 'btn btn-success btn-block btn-lg'));
+    echo '</p>';
     
     /**
      * FormHelperの終了

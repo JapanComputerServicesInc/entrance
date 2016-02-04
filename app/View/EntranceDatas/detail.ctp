@@ -5,9 +5,8 @@
 <script type="text/javascript">
 <!--
 // ページを表示したとき、changeDisabled() を呼び出す
-//※退社情報登録画面にアクセスした時、「その他」が選択されていたらテキストを入力出来るようにする為
+//※アクセスした時、「その他」が選択されていたらテキストを入力出来るようにする為
 window.onload = changeDisabled;
-
 // -->
 </script>
 
@@ -15,11 +14,13 @@ window.onload = changeDisabled;
     <h3><?php echo $title_for_layout; ?></h3>
 </div>
 
-<?php echo $this->Session->flash(); ?>
-
-<p>
+<div class="well well-sm">
 <?php echo $this->html->link('一覧画面に戻る', array('action'=>'adminlist','?'=>array('year'=>$y,'&','month'=>$m,'&','select_btn'=>$select_btn))); ?>
-</p>
+　｜　
+<?php echo $this->html->link('この画面を印刷する', array('action'=>'detail.pdf')); ?>
+</div>
+
+<?php echo $this->Session->flash(); ?>
 
 <?php
         
@@ -54,7 +55,9 @@ window.onload = changeDisabled;
             'value' => $selectedDay
             )
     );
-
+?>
+<div style="margin:20px 0px;">
+<?php
     /**
      * 詳細画面にて行う日付の遷移(翌日及び前日)
      */
@@ -65,7 +68,10 @@ window.onload = changeDisabled;
     echo '&nbsp;&nbsp;';    
     echo $this->html->link('≫', array('action'=>'detail','?'=>array('selectedDay'=>$nextday,'&','select_btn'=>$select_btn)));
     echo '</p>';    
-
+    
+?>    
+</div>
+<?php    
     /**
      * 表示項目名：出社時間
      * DB項目名　：ENT_TIME

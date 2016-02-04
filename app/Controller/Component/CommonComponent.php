@@ -13,6 +13,7 @@ class CommonComponent extends Component {
         //変数宣言
         $keyWeek = array();
         $valWeek = array();
+        $wday = Configure::read('wday');
         
         //当日の日付を取得
         $today = date("Y-m-d");
@@ -24,14 +25,16 @@ class CommonComponent extends Component {
         for ($i=0; $i<7; $i++) {
             
             //当日からループ回数の日付をマイナスした値を取得する
-            $keyDate = strtotime('-' . $i . 'day', $day);
-            //先程取得した値($keyDate)を「Y/m/d」形式に変換して配列に格納
-            $keyWeek[] = date("Y-m-d",$keyDate);
+            $loopdate = strtotime('-' . $i . 'day', $day);
+
+            //先程取得した値($loopdate)を「Y/m/d」形式に変換して配列に格納
+            $keyWeek[] = date("Y-m-d",$loopdate);
             
-            //当日からループ回数の日付をマイナスした値を取得する
-            $valDate = strtotime('-' . $i . 'day', $day);
-            //先程取得した値($keyDate)を「Y年m月d日」形式に変換して配列に格納
-            $valWeek[] = date("Y年m月d日",$valDate);
+            //$wに対象の曜日を取得
+            $w = $wday[date("w", $loopdate)];
+            
+            //先程取得した値($loopdate)を「Y年m月d日()」形式に変換し、曜日も付与して配列に格納
+            $valWeek[] = date("Y年m月d日",$loopdate). "(" . $w . ")";
             
         }
         

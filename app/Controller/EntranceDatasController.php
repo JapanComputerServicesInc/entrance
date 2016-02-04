@@ -11,10 +11,8 @@ class EntranceDatasController extends AppController {
     public function beforeFilter(){
         //ログインしないでアクセス出来るアクションを登録する
         $this->Auth->allow('index','entrance','leave');
-        //1/29-add
         $this->set('auth',$this->Auth);
     }
-    
     
     /* 
      * アクション名：index
@@ -23,7 +21,6 @@ class EntranceDatasController extends AppController {
     public function index() {
 
     }
-    
     
     /* 
      * アクション名：entrance
@@ -116,7 +113,7 @@ class EntranceDatasController extends AppController {
             //検索した結果、データが存在する場合は「request->data」に値を入れて、ビューできるようにする
             If(!$this->request->data = $this->EntranceData->findByRecord_date($selectedDay)) {
                 //検索した結果、データが見つからない場合、出社時間の初期値を設定
-                $enttime = '08:00:00';
+                $enttime = ENT_TIME;
             }
         }
         
@@ -217,7 +214,7 @@ class EntranceDatasController extends AppController {
             //検索した結果、データが存在する場合は「request->data」に値を入れて、ビュー側で使えるようにする
             If(!$this->request->data = $this->EntranceData->findByRecord_date($selectedDay)) {
                 //検索した結果、データが見つからない場合、退社時間の初期値を設定
-                $leavetime = '20:00:00';
+                $leavetime = LEAVE_TIME;
             }
         }
         
@@ -350,14 +347,14 @@ class EntranceDatasController extends AppController {
             //検索した結果、データが存在する場合は「request->data」に値を入れて、ビューできるようにする
             If(!$this->request->data = $this->EntranceData->findByRecord_date($selectedDay)) {
                 //検索した結果、データが見つからない場合、出社時間の初期値を設定
-                $enttime = '08:00:00';
+                $enttime = ENT_TIME;
             }
             
             //特定の日付($selectedDay)を条件に、ENTRANCE_DATASテーブルの情報を検索する
             //検索した結果、データが存在する場合は「request->data」に値を入れて、ビュー側で使えるようにする
             If(!$this->request->data = $this->EntranceData->findByRecord_date($selectedDay)) {
                 //検索した結果、データが見つからない場合、退社時間の初期値を設定
-                $leavetime = '20:00:00';
+                $leavetime = LEAVE_TIME;
             }
         }
         
@@ -373,7 +370,7 @@ class EntranceDatasController extends AppController {
         $this->set('displaydate', $displaydate);
         
         //詳細で表示する曜日を設定、view-set
-        $wday=array("日","月","火","水","木","金","土");
+        $wday = Configure::read('wday');
         $w = $wday[date("w", strtotime($selectedDay))];
         $this->set('w', $w);
         
@@ -410,7 +407,7 @@ class EntranceDatasController extends AppController {
         $m = date('m');
         
         //変数の設定
-        $wday=array("日","月","火","水","木","金","土");
+        $wday = Configure::read('wday');
         $resultset = '';
         $select_btn ='1';
         
@@ -520,12 +517,16 @@ class EntranceDatasController extends AppController {
             } else {
                 $manager_ck = "";
             }
+
+            //土日の場合は背景色を変更
+            $tdcolor = '';
+            if ($w == '土' || $w == '日'){$tdcolor = 'class = "active"';}
             
             if ($hyoujiFlg == "0") {
                  //一覧⇒詳細へ遷移する場合の表示("～EntranceDatas/detail?selectedDay=20XX-XX-XX"となる)
-                 $resultset = $resultset ."<tr><td><a href='../EntranceDatas/detail?selectedDay="
+                 $resultset = $resultset ."<tr><td ". $tdcolor ."><a href='../EntranceDatas/detail?selectedDay="
                     .date("Y-m-d", $timestamp) ."&select_btn="."$select_btn'>".date("Y/m/d", $timestamp) ."({$w})" 
-                    ."</a></td><td>$input_ck</td><td>$manager_ck</td></tr>\n";
+                    ."</a></td><td ". $tdcolor .">$input_ck</td><td ". $tdcolor .">$manager_ck</td></tr>\n";
             }
         
         }     

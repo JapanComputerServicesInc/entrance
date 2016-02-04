@@ -96,18 +96,34 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
                             'action' => 'adminlist'
                         ));
                         echo '</li>';
+
+//隠し機能
+//                        echo '<li>';
+//                        echo $this->Html->link('add', array(
+//                            'controller' => 'Users', 
+//                            'action' => '新規ユーザー登録'
+//                        ));
+//                        echo '</li>';
+                        
+                        echo '<li>';
+                        echo $this->Html->link('パスワード変更', array(
+                            'controller' => 'Users', 
+                            'action' => 'password'
+                        ));
+                        echo '</li>';
+
                         echo '<li>';
                         echo $this->Html->link('ログアウト', array(
                             'controller' => 'Users', 
                             'action' => 'logout'
                         ));
                         echo '</li>';
-                        } ?>
+                        
+                    } ?>
                 </ul>
             </div>
         </div>
     </nav>
-
     
     <div class="container">
 
@@ -115,16 +131,13 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
         <?php echo $this->fetch('content'); ?>
 
     </div><!-- /container -->
-
-        
         
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
     <script src="//google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
-               <?php echo $this->Html->script('bootstrap.min'); ?>
+    <?php echo $this->Html->script('bootstrap.min'); ?>
     <?php echo $this->fetch('script'); ?>
 
 </body>

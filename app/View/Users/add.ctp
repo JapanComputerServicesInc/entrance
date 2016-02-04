@@ -1,12 +1,15 @@
-<h1>新規ユーザー登録画面</h1>
-<br>
+<div class="page-header">
+    <h3><?php echo $title_for_layout; ?></h3>
+</div>
+
 <?php
-    
+
+    echo $this->Session->flash();
     /**
      * AppControllerで設定したsessionの呼び出し
      */
     echo $this->Session->flash('Auth');
-    
+        
     /**
      * FormHelperの宣言とコントローラーとアクションの指定
      */
@@ -18,7 +21,9 @@
      * 表示する値：テキストボックス
      * 初期表示値：空白
      */
-    echo $this->Form->input('username',array('label'=>'ユーザー名','required' => false))."<br />";
+    echo '<p>';
+    echo $this->Form->input('username',array('label'=>'ユーザー名','required' => false));
+    echo '</p>';
     
     /**
      * 表示項目名：パスワード
@@ -26,21 +31,21 @@
      * 表示する値：テキストボックス
      * 初期表示値：空白
      */
-    echo $this->Form->input('password',array('label'=>'パスワード','required' => false))."<br />";
+    echo '<p>';
+    echo $this->Form->input('password',array('label'=>'パスワード','required' => false));
+    echo '</p>';
     
     /**
-     * 表示項目名：新規ユーザを作成する
-     * DB項目名　：なし
-     * 表示する値：ボタン
-     * 初期表示値：新規ユーザを作成する
+     * 表示項目名：ユーザー作成ボタン
      */
-    echo $this->Form->submit('新規ユーザを作成する');
-    
+    echo '<p style="margin-top:20px;">';
+    echo $this->Form->button('<span class="glyphicon glyphicon-user"></span>　ユーザーを作成する　', array('class' => 'btn btn-success'));
+    echo '</p>';
+
+
     /**
      * FormHelperの終了
      */
     echo $this->Form->end();
     
 ?>
-<br>
-<a href="../Users/login" id="switch2" class="label btn-primary">ログイン画面へ</a>

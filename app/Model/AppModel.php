@@ -30,4 +30,12 @@ App::uses('Model', 'Model');
  * @package       app.Model
  */
 class AppModel extends Model {
+
+    //alphaNumericでの日本語入力チェック対応
+    public function alphaNumeric($check) {
+        $value = array_values($check);  // 配列の添字を数値添字に変換
+        $value = $value[0];     // 最初の値を取る
+        return preg_match('/^[a-zA-Z0-9]+$/', $value);
+    }
+
 }
