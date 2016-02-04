@@ -47,8 +47,6 @@ class AppController extends Controller {
         )
     );
     
-    
-    
     public $helpers = array(
         'Session',
         'Html' => array('className' => 'BoostCake.BoostCakeHtml'),
@@ -56,7 +54,14 @@ class AppController extends Controller {
         'Paginator' => array('className' => 'BoostCake.BoostCakePaginator'),
     );
     
-    
+    //エラー時はindexにリダイレクト
+    public function appError($error) {
+        $this->Session->setFlash(__('エラーが発生したため、トップページに遷移しました。操作をやり直してください。'), 'alert', array(
+            'plugin' => 'BoostCake',
+            'class' => 'alert-danger'
+        ));
+        $this->redirect(array('controller' => 'EntranceDatas', 'action' => 'index'));
+    }
     
 }
 
