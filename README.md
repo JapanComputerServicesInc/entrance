@@ -46,11 +46,13 @@ database.php ⇒ DB接続設定
 ##DB作成
 
 以下のSQLを実行する
+
 entrance\database\createtable.sql
 
 
 ##管理者作成
 
-WebブラウザでXXXX/entrance/Users/addにアクセスし、管理用ユーザーを作成する
-パスワード変更はXXXX/entrance/Users/passwordから実施可能
+WebブラウザでXXXX/entrance/Users/addにアクセスし、管理用ユーザーを作成する。
+
+パスワード変更はXXXX/entrance/Users/passwordから実施可能。
 
