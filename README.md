@@ -45,7 +45,7 @@ database.php ⇒ DB接続設定
 
 ##DB作成
 
-以下のSQLを実行する
+以下のSQLを実行し、テーブルを作成する。
 
 entrance\database\createtable.sql
 
