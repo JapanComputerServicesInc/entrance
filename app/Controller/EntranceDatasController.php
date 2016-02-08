@@ -6,10 +6,10 @@ class EntranceDatasController extends AppController {
     
     /* 
      * アクション名：beforeFilter
-     * 概要：login処理の設定
+     * 概要：各アクション実行前に行う処理
      */
     public function beforeFilter(){
-        //ログインしないでアクセス出来るアクションを登録する
+        //ログインしないでも利用可能なアクションを登録する
         $this->Auth->allow('index','entrance','leave');
         $this->set('auth',$this->Auth);
     }
@@ -19,6 +19,8 @@ class EntranceDatasController extends AppController {
      * 概要：TOP画面の処理
      */
     public function index() {
+        //ページ名
+        $this->set('title_for_layout', 'TOP');   
 
     }
     
@@ -34,7 +36,7 @@ class EntranceDatasController extends AppController {
         //当日の日付を取得
         $today = date("Y-m-d");
         
-        //ビューで設定した変数の宣言
+        //変数の宣言
         $selectedDay = null;
         $enttime = '';
         $errFlg = '0';
@@ -45,10 +47,10 @@ class EntranceDatasController extends AppController {
                 //前画面で選択された日付を変数に格納
                 $selectedDay = $this->request->data('EntranceData.RECORD_DATE');
                 
-                //保存ボタンの場合の処理("正"の場合はif以下の文、"負"の場合はelse以下の文を実行)
+                //保存ボタンの場合の処理("True"の場合はif以下の文、"False"の場合はelse以下の文を実行)
                 if(isset($this->request->data['save'])){
                     
-                    //退社のバリデーションエラーを除いている
+                    //退社データのバリデーションを行わないよう、除外する
                     $this->EntranceData->validator()->remove('LEAVE_NAME');
                     $this->EntranceData->validator()->remove('LEAVE_TIME');
                     $this->EntranceData->validator()->remove('LEAVE_CLEAR');
@@ -94,7 +96,7 @@ class EntranceDatasController extends AppController {
         
         }
         
-        //管理者チェックの有無を確認し、完了していれば編集不可、未完了であれば編集可にする
+        //管理者チェックの有無を確認し、チェック有の場合は編集不可にする
         $editFlg = $this->_checkManagerCheck($selectedDay);
 
         //本番サーバーの場合、アクセス元がJCS本社でなければ編集不可とする
@@ -105,7 +107,7 @@ class EntranceDatasController extends AppController {
         If ($errFlg == '0'){
             
             //特定の日付($selectedDay)を条件に、ENTRANCE_DATASテーブルの情報を検索する
-            //検索した結果、データが存在する場合は「request->data」に値を入れて、ビューできるようにする
+            //検索した結果、データが存在する場合は「request->data」に値を入れて、ビュー側で表示できるようにする
             If(!$this->request->data = $this->EntranceData->findByRecord_date($selectedDay)) {
                 //検索した結果、データが見つからない場合、出社時間の初期値を設定
                 $enttime = ENT_TIME;
@@ -138,7 +140,7 @@ class EntranceDatasController extends AppController {
         //当日の日付を取得
         $today = date("Y-m-d");
         
-        //ビューで設定した変数の宣言
+        //変数の宣言
         $selectedDay = null;
         $leavetime = '';
         $errFlg = '0';
@@ -149,10 +151,10 @@ class EntranceDatasController extends AppController {
                 //前画面で選択された日付を変数に格納
                 $selectedDay = $this->request->data('EntranceData.RECORD_DATE');
                 
-                //保存ボタンの場合の処理("正"の場合はif以下の文、"負"の場合はelse以下の文を実行)
+                //保存ボタンの場合の処理("True"の場合はif以下の文、"False"の場合はelse以下の文を実行)
                 if(isset($this->request->data['save'])){
                     
-                    //出社のバリデーションエラーを除いている
+                    //出社データのバリデーションチェックは行わないため、除外
                     $this->EntranceData->validator()->remove('ENT_NAME');
                     $this->EntranceData->validator()->remove('ENT_TIME');
                     $this->EntranceData->validator()->remove('ENT_COMMENT');               
@@ -191,7 +193,7 @@ class EntranceDatasController extends AppController {
         
         }
         
-        //管理者チェックの有無を確認し、完了していれば編集不可、未完了であれば編集可にする
+        //管理者チェックの有無を確認し、チェック済みの場合は編集不可とする
         $editFlg = $this->_checkManagerCheck($selectedDay);
 
         //本番サーバーの場合、アクセス元がJCS本社でなければ編集不可とする
@@ -247,8 +249,6 @@ class EntranceDatasController extends AppController {
                 'plugin' => 'BoostCake',
                 'class' => 'alert-info'
             ));
-
-
             
         } else {
             //データが存在しない場合(管理者チェックが完了していない場合)チェックが完了していない場合は情報の編集が可能
@@ -270,7 +270,7 @@ class EntranceDatasController extends AppController {
         $editFlg = false;
         
         If ($_SERVER['SERVER_NAME'] == HONBAN_URL) {
-            if (!($_SERVER["REMOTE_ADDR"] == JCS_IP)) {
+            if (!($_SERVER["REMOTE_ADDR"] == JCS_IP || $_SERVER["REMOTE_ADDR"] == JCS_IP2 )) {
                 $editFlg = true;
                 $this->Session->setFlash(__('JCS本社からの接続ではないため、データの変更はできません。'), 'alert', array(
                     'plugin' => 'BoostCake',
@@ -309,7 +309,7 @@ class EntranceDatasController extends AppController {
                 //前画面で選択された日付を変数に格納
                 $selectedDay = $this->request->data('EntranceData.RECORD_DATE');
                 
-                //保存ボタンの場合の処理("正"の場合はif以下の文、"負"の場合はelse以下の文を実行)
+                //保存ボタンの場合の処理("True"の場合はif以下の文、"False"の場合はelse以下の文を実行)
                 if(isset($this->request->data['save'])){
                     
                     //リクエストデータ「使用した鍵」の値を変数に格納
@@ -347,15 +347,15 @@ class EntranceDatasController extends AppController {
                 }
             }
         
-        //getの場合(詳細から遷移してきた場合)の処理
+        //getの場合(詳細画面から遷移してきた場合)の処理
         } else if ($this->request->is('get')) {
             if(!empty($this->request->query['selectedDay'])){
-                //選択した日付を取得する(詳細⇒一覧へ遷移‐URLで渡された値を取得)
+                //選択した日付を取得する(詳細画面⇒一覧画面へ遷移‐URLで渡された値を取得)
                 $selectedDay = $this->request->query['selectedDay'];
             }
             
             if(!empty($this->request->query['select_btn'])){
-                //選択したラジオボタンの値を取得する(詳細⇒一覧へ遷移‐URLで渡された値を取得)
+                //選択したラジオボタンの値を取得する(詳細画面⇒一覧画面へ遷移‐URLで渡された値を取得)
                 $select_btn = $this->request->query['select_btn'];
             }
         
@@ -366,7 +366,7 @@ class EntranceDatasController extends AppController {
         If ($errFlg == '0'){
             
             //特定の日付($selectedDay)を条件に、ENTRANCE_DATASテーブルの情報を検索する
-            //検索した結果、データが存在する場合は「request->data」に値を入れて、ビューできるようにする
+            //検索した結果、データが存在する場合は「request->data」に値を入れて、ビュー側で使用できるようにする
             If(!$this->request->data = $this->EntranceData->findByRecord_date($selectedDay)) {
                 //検索した結果、データが見つからない場合、出社時間の初期値を設定
                 $enttime = ENT_TIME;
@@ -391,12 +391,12 @@ class EntranceDatasController extends AppController {
         $displaydate = date("Y年m月d日", strtotime($selectedDay));
         $this->set('displaydate', $displaydate);
         
-        //詳細で表示する曜日を設定、view-set
+        //詳細画面で表示する曜日を設定、view-set
         $wday = Configure::read('wday');
         $w = $wday[date("w", strtotime($selectedDay))];
         $this->set('w', $w);
         
-        //詳細⇒一覧へ遷移する場合の表示($selectedDayで年や月を個別で取得出来る)
+        //詳細画面⇒一覧画面へ遷移する場合の表示($selectedDayで年や月を個別で取得出来る)
         $y = date("Y", strtotime($selectedDay));
         $m = date("m", strtotime($selectedDay));
         
@@ -462,9 +462,6 @@ class EntranceDatasController extends AppController {
             }
         
         }
-        
-        //選択したラジオボタンの値を取得する
-        //$select_btn = $this->request->data('EntranceData.selectbutton');
         
         //3年分(当年～当年マイナス2年分)の日付を取得する(共通関数を使用)
         $years = $this->Common->getYear();

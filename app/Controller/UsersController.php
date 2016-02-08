@@ -5,6 +5,10 @@ class UsersController extends AppController {
     //使用するモデル
     var $uses = array('User');
     
+    /* 
+     * アクション名：beforeFilter
+     * 概要：各アクション実行前に行う処理
+     */    
     public function beforeFilter(){
         //ログインしないでアクセス出来るアクションを登録する
         $this->Auth->allow('login','add');
