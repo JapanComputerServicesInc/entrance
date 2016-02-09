@@ -1,14 +1,9 @@
-<?php echo $this->Html->script( '//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'); ?>
-<?php echo $this->Html->script('changeDisabled.js'); ?>
-<?php echo $this->Html->script('checkAll.js'); ?>
-
-<script type="text/javascript">
-<!--
-// ページを表示したとき、changeDisabled() を呼び出す
-//※アクセスした時、「その他」が選択されていたらテキストを入力出来るようにする為
-window.onload = changeDisabled;
-// -->
-</script>
+<?php
+    //jsファイルの読み込み
+    echo $this->Html->script('checkAll.js', array('inline' => false));
+    echo $this->Html->script('changeDisabled.js', array('inline' => false));
+    echo $this->Html->script('onloadChange.js', array('inline' => false));
+?>
 
 <div class="page-header">
     <h3><?php echo $title_for_layout; ?></h3>

@@ -1,15 +1,10 @@
-<?php echo $this->Html->script( '//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'); ?>
-<?php echo $this->Html->script('changeDisabled.js'); ?>
-<?php echo $this->Html->script('checkAll.js'); ?>
-
-<script type="text/javascript">
-<!--
-// ページを表示したとき、changeDisabled() を呼び出す
-//※退社情報登録画面にアクセスした時、「その他」が選択されていたらテキストを入力出来るようにする為
-window.onload = changeDisabled;
-
-// -->
-</script>
+<?php
+    //jsファイルの読み込み
+    echo $this->Html->script('checkAll.js', array('inline' => false));
+    echo $this->Html->script('changeDate.js', array('inline' => false));
+    echo $this->Html->script('changeDisabled.js', array('inline' => false));
+    echo $this->Html->script('onloadChange.js', array('inline' => false));
+?>
 
 <div class="page-header">
     <h3><?php echo $title_for_layout; ?></h3>
@@ -51,6 +46,17 @@ window.onload = changeDisabled;
         ,'class'=> 'form-control'
     ));
     echo '</p>';
+
+
+    /**
+     * 現在時刻を入力ボタン
+     */
+    $changeButton =  $this->Form->button('現在時刻を入力', array(
+            'type' => 'button'
+           ,'id' => 'changetime'
+           ,'disabled'=>$editFlg 
+           ,'class' => 'btn btn-primary '
+        )) . "<div style='margin-top:10px;'>";
     
     /**
      * 表示項目名：退社時間
@@ -61,11 +67,15 @@ window.onload = changeDisabled;
     echo '<p>';
     echo $this->Form->input('LEAVE_TIME', array(
         'type' => 'time' 
-        ,'label' => '退社時間' 
+        ,'label' => '退社時間&nbsp;&nbsp;' 
         ,'timeFormat' => '24'
         ,'selected' => $leavetime
+        ,'id' => 'selecttime'
+        ,'between' => $changeButton
+        ,'after' => '</div>'
     ));
     echo '</p>';
+
     
     /**
      * 表示項目名：最後に退社した人

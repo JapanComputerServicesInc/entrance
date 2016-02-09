@@ -52,7 +52,15 @@ entrance\database\createtable.sql
 
 ##管理者作成
 
-WebブラウザでXXXX/entrance/Users/addにアクセスし、管理用ユーザーを作成する。
+管理者を作成する場合、WebブラウザでXXXX/entrance/Users/addにアクセスし、ユーザーを作成する。
+
+上記の画面はログイン後のみ利用可能となっており、管理者が一人もいない場合にはUsersController.phpのbeforeFilterに'add'を追加し、ログインなしでも使用できるようにする。
 
 パスワード変更はXXXX/entrance/Users/passwordから実施可能。
 
+
+##設計書類
+
+要件定義書、基本設計書、DB定義書は以下に格納。
+
+\entrance\docs

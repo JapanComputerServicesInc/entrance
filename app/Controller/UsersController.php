@@ -11,7 +11,7 @@ class UsersController extends AppController {
      */    
     public function beforeFilter(){
         //ログインしないでアクセス出来るアクションを登録する
-        $this->Auth->allow('login','add');
+        $this->Auth->allow('login');
         $this->set('auth',$this->Auth);
         
     }
@@ -65,9 +65,6 @@ class UsersController extends AppController {
                 
             //ログイン失敗なら
             }else{
-                //エラー文言を表示
-                
-                //メッセージの表示を変える
                 //エラーメッセージを表示
                 $this->Session->setFlash(__('ユーザー名かパスワードが違います。'), 'alert', array(
                     'plugin' => 'BoostCake',

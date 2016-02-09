@@ -1,3 +1,8 @@
+<?php
+    //jsファイルの読み込み
+    echo $this->Html->script('changeDate.js', array('inline' => false));
+?>
+
 <div class="page-header">
     <h3><?php echo $title_for_layout; ?></h3>
 </div>
@@ -39,6 +44,17 @@
     ));
     echo '</p>';
     
+
+    /**
+     * 現在時刻を入力ボタン
+     */
+    $changeButton =  $this->Form->button('現在時刻を入力', array(
+            'type' => 'button'
+           ,'id' => 'changetime'
+           ,'disabled'=>$editFlg 
+           ,'class' => 'btn btn-primary '
+        )) . "<div style='margin-top:10px;'>";
+   
     /**
      * 表示項目名：出社時間
      * DB項目名　：ENT_TIME
@@ -48,10 +64,13 @@
     echo '<p>';
     echo $this->Form->input('ENT_TIME', array(
         'type' => 'time'
-        ,'label' => '出社時間'
+        ,'label' => '出社時間&nbsp;&nbsp;'
         ,'timeFormat' => '24' 
         ,'selected' => $enttime
-    ));
+        ,'id' => 'selecttime'
+        ,'between' => $changeButton
+        ,'after' => '</div>'
+        ));
     echo '</p>';
     
     /**
