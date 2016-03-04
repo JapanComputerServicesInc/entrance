@@ -546,21 +546,21 @@ class EntranceDatasController extends AppController {
 
                 // 出退勤者／時間の設定
                 $ent = $leave = "";
-                if ( !empty(Hash::get($result, 'EntranceData.ENT_NAME'))
-                    && !empty(Hash::get($result, 'EntranceData.ENT_TIME')) ) {
+                if ( !$this->Common->emptyResultValue($result, "ENT_NAME")
+                    && !$this->Common->emptyResultValue($result, "ENT_TIME") ) {
                     $ent = Hash::get($result, 'EntranceData.ENT_NAME')
-                        ." ( ".date('G:i', strtotime(Hash::get($result, 'EntranceData.ENT_TIME')))." )";
+                        ." ( ".date('H:i', strtotime(Hash::get($result, 'EntranceData.ENT_TIME')))." )";
                 }
-                if ( !empty(Hash::get($result, 'EntranceData.LEAVE_NAME'))
-                    && !empty(Hash::get($result, 'EntranceData.LEAVE_TIME')) ) {
+                if ( !$this->Common->emptyResultValue($result, "LEAVE_NAME")
+                    && !$this->Common->emptyResultValue($result, "LEAVE_TIME") ) {
                     $leave = Hash::get($result, 'EntranceData.LEAVE_NAME')
-                        ." ( ".date('G:i', strtotime(Hash::get($result, 'EntranceData.LEAVE_TIME')))." )";
+                        ." ( ".date('H:i', strtotime(Hash::get($result, 'EntranceData.LEAVE_TIME')))." )";
                 }
 
                 //一覧⇒詳細へ遷移する場合の表示("～EntranceDatas/detail?selectedDay=20XX-XX-XX"となる)
                 $resultset =
-                     "$resultset<tr><td $tdcolor><a href='../EntranceDatas/detail?selectedDay=".date("Y-m-d", $timestamp)
-                         ."&select_btn=$select_btn'>".date("Y/m/d", $timestamp) ."({$w})</a></td>"
+                     "$resultset<tr><td $tdcolor><a href='../EntranceDatas/detail?selectedDay="
+                         .date("Y-m-d", $timestamp)."&select_btn=$select_btn'>".date("Y/m/d", $timestamp) ."({$w})</a></td>"
                     ."<td $tdcolor>$ent</td>"
                     ."<td $tdcolor>$leave</td>"
                     ."<td $tdcolor>$input_ck</td>"
