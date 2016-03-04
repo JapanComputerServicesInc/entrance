@@ -3,12 +3,12 @@
 </div>
 
 <?php
-    
+
     /**
      * FormHelperの宣言
      */
     echo $this->Form->create('EntranceData');
-    
+
     /**
      * 表示項目名：なし
      * DB項目名　：ID
@@ -16,22 +16,22 @@
      * 初期表示値：なし
      */
     echo $this->Form->input('ID');
-    
-    
+
+
     /**
      * 表示項目名：なし
      * DB項目名　：なし
      * 表示する値：3年分のデータ
      * 初期表示値：$thisyear
-     */  
+     */
     echo '<p>';
     echo $this->Form->select('select1', array($year), array(
         'value' => $thisyear
-        ,'empty' => false 
+        ,'empty' => false
         ,'class'=> 'form-control'
     ));
     echo '</p>';
-    
+
     /**
      * 表示項目名：なし
      * DB項目名　：なし
@@ -58,7 +58,7 @@
             ,'class'=> 'form-control'
     ));
     echo '</p>';
-    
+
     /**
      * 表示項目名：全ての日付を表示、入力されていない日付のみ表示、管理者確認がされていない日付のみ表示
      * DB項目名　：なし
@@ -72,8 +72,8 @@
     echo $this->Form->radio('selectbutton', $options, $attributes);
     echo '</div>';
     echo '</pre>';
-    
-    
+
+
     /**
      * 表示項目名：表示
      * DB項目名　：なし
@@ -83,25 +83,27 @@
     echo '<p>';
     echo $this->Form->button('<span class="glyphicon glyphicon-calendar"></span>　表示　', array('name' => 'display', 'class' => 'btn btn-primary btn-block'));
     echo '</p>';
-    
-    
+
+
     /**
      * 結果一覧の表示
      */
     echo "<div style='margin-top:30px;text-align:center;'>";
     echo "<table class='table table-bordered table-hover'>";
     echo "<tr>";
-    echo "<th class='active'><div class='text-center''>日付</div></th>";
-    echo "<th class='active'><div class='text-center''>入力状況</div></th>";
-    echo "<th class='active'><div class='text-center''>確認状況</div></th>";
+    echo "<th class='active'><div class='text-center'>日付</div></th>";
+    echo "<th class='active'><div class='text-center'>出勤者（出勤時間）</div></th>";
+    echo "<th class='active'><div class='text-center'>退出者（退出時間）</div></th>";
+    echo "<th class='active'><div class='text-center'>入力状況</div></th>";
+    echo "<th class='active'><div class='text-center'>確認状況</div></th>";
     echo "</tr>";
     echo $resultset;
     echo "</table>";
-    
-    
+
+
     /**
      * FormHelperの終了
      */
-    echo $this->Form->end(); 
+    echo $this->Form->end();
 
 ?>
