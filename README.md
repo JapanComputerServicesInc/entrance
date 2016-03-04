@@ -6,15 +6,18 @@
 
 ## 構成
 
-[Framework]CakePHP
+[Programming Language]PHP 5.3.20 (or later)
 
-[Database]MySQL
+[Framework]CakePHP 2.7.6
 
-[Web Server]Apache
+[Database]MySQL 5.3 (or later)
+　　※5.6以降の場合は、MySQLのディレクトリ内にあるmy.cnfのsql_modeの「STRICT＿TRANS＿TABLES」設定を削除してください。
+
+[Web Server]Apache 2.2.3 (or later)
 
 [CSS Framework]Bootstrap(Honoka)
 
-[PDF Webkit]WkHtmlToPdf
+[PDF Webkit]WkHtmlToPdf 0.12.3 (or later)
 
 [cakePHP-Plugin]Boostcake,cakePDF
 
@@ -29,7 +32,7 @@ Apache
 
 MySQL
 
-WkHtmlToPdf（+日本語フォント）
+WkHtmlToPdf（+IPA日本語フォント）
 
 
 ##設定ファイル変更
