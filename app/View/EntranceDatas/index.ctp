@@ -7,7 +7,11 @@
     echo'</div>';
 
     echo $this->Session->flash();    
-    
+
+    echo '<div class="alert alert-info" role="alert" style="margin:20px 30px;">';
+    echo '<span class="glyphicon glyphicon-tags"></span><strong>　'.$office.'</strong>';
+    echo '</div>';
+
     echo'<p style="margin:20px 30px;">';
     echo $this->Html->link(
         $this->Html->tag('span', ' 出社情報登録'),

@@ -22,6 +22,10 @@ class EntranceDatasController extends AppController {
         //ページ名
         $this->set('title_for_layout', 'TOP');
 
+        // 利用オフィスの名称設定
+        $this->loadModel('Key');
+        $office = $this->Key->findByKey('USEAGE_OFFICE');
+        $this->set('office', $office['Key']['val']);
     }
 
     /*
@@ -100,7 +104,8 @@ class EntranceDatasController extends AppController {
         $editFlg = $this->_checkManagerCheck($selectedDay);
 
         //本番サーバーの場合、アクセス元がJCS本社でなければ編集不可とする
-        $editFlg = $this->_checkServerIP();
+        // 2016.08.01 Firewall側でアクセス制限を行う為、本関数でのチェックを行わないように変更
+        // $editFlg = $this->_checkServerIP();
 
         //エラーフラグが0の場合(バリデーションエラーが発生した場合、エラーフラグは1になる)
         //(バリデーションエラーの場合は、DBのデータではなくリクエストデータを表示させるため、以下のDB読み込みを行わない)
@@ -197,7 +202,8 @@ class EntranceDatasController extends AppController {
         $editFlg = $this->_checkManagerCheck($selectedDay);
 
         //本番サーバーの場合、アクセス元がJCS本社でなければ編集不可とする
-        $editFlg = $this->_checkServerIP();
+        // 2016.08.01 Firewall側でアクセス制限を行う為、本関数でのチェックを行わないように変更
+        // $editFlg = $this->_checkServerIP();
 
         //エラーフラグが0の場合(バリデーションエラーが発生した場合、エラーフラグは1になる)
         //(バリデーションエラーの場合は、DBのデータではなくリクエストデータを表示させるため、以下のDB読み込みを行わない)
@@ -260,11 +266,14 @@ class EntranceDatasController extends AppController {
     }
 
 
-    /* 関数名：_checkServerIP
+    /* Deprecated this function from 2016.08.01
+     * 
+     * 関数名：_checkServerIP
      * 概要：本番サーバーの場合、アクセス元がJCS本社でなければ編集不可とする
      * 引数：なし
      * 戻り値：True(編集不可)/False(編集可)
      */
+    /*
     public function _checkServerIP() {
 
         $editFlg = false;
@@ -282,6 +291,7 @@ class EntranceDatasController extends AppController {
         return $editFlg;
 
     }
+    */
 
 
     /*
