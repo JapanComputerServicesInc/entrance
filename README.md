@@ -41,6 +41,8 @@ WkHtmlToPdf（+IPA日本語フォント）
 
 bootstrap.php ⇒ WkHtmlToPdfバイナリファイルのパス
 
+core.php ⇒ セッション設定（cookie名変更、ビルトインをcakeに変更）
+
 const.php ⇒ サーバー等のIP設定
 
 database.php ⇒ DB接続設定
@@ -51,6 +53,15 @@ database.php ⇒ DB接続設定
 以下のSQLを実行し、テーブルを作成する。
 
 entrance\database\createtable.sql
+
+
+##オフィス単位での利用注意
+
+オフィス単位で利用する場合、アプリケーションディレクトリ、DBを分けて構築する。
+
+keysテーブルのval値に「4F」、「7F」等の値を設定する（TOP画面に表示する文字を設定）。
+
+同一サーバー、同一PHP環境を利用する場合セッションのクッキー名が重複する為、セッション削除時には別オフィスのセッションも削除されてしまうので、厳密には環境毎に別けた方が良い。
 
 
 ##管理者作成
