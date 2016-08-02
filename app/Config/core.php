@@ -214,10 +214,11 @@
  * To use database sessions, run the app/Config/Schema/sessions.php schema using
  * the cake shell command: cake schema create Sessions
  */
-        
-        Configure::write('Session', array(
-		'defaults' => 'php'
-	));
+    
+    Configure::write('Session', array(
+        'defaults' => 'cake',
+        'cookie'   => 'SESENTRANCE'
+    ));
         
 /**
  * A random string used in security hashing methods.
