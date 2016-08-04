@@ -29,7 +29,8 @@ class User extends AppModel {
                 'message' => 'ユーザー名を入力してください。',
             ),
             'rule2' => array(
-                'rule' => array('alphaNumeric'),
+                // 'rule' => array('alphaNumeric'),
+                'rule' => '/^[a-z\d\_]*$/i',
                 'message' => '半角英数字で入力して下さい。'
             )
         ),
