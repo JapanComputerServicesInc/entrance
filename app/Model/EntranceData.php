@@ -91,6 +91,11 @@ class EntranceData extends AppModel {
             'required' => true,
             'message' => '必ず選択してください。'
         ),
+        'LEAVE_AIRCLEANER' => array(
+            'rule'     => array('comparison', '!=', 0),
+            'required' => true,
+            'message' => '必ず選択してください。'
+        ),
         'LEAVE_FAX' => array(
             'rule'     => array('comparison', '!=', 0),
             'required' => true,

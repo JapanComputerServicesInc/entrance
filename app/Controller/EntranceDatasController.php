@@ -61,6 +61,7 @@ class EntranceDatasController extends AppController {
                     $this->EntranceData->validator()->remove('LEAVE_WINDOW');
                     $this->EntranceData->validator()->remove('LEAVE_PRINTER');
                     $this->EntranceData->validator()->remove('LEAVE_HUMID');
+                    $this->EntranceData->validator()->remove('LEAVE_AIRCLEANER');
                     $this->EntranceData->validator()->remove('LEAVE_FAX');
                     $this->EntranceData->validator()->remove('LEAVE_AIRCON');
                     $this->EntranceData->validator()->remove('LEAVE_SEAIRCON');
@@ -509,6 +510,7 @@ class EntranceDatasController extends AppController {
                 ,'LEAVE_WINDOW' => '1'
                 ,'LEAVE_PRINTER' => '1'
                 ,'LEAVE_HUMID' => '1'
+                ,'LEAVE_AIRCLEANER' => '1'
                 ,'LEAVE_FAX' => '1'
                 ,'LEAVE_AIRCON' => '1'
                 ,'LEAVE_SEAIRCON' => '1'

@@ -161,6 +161,19 @@
     ));
     
     /**
+     * 表示項目名：空気清浄機(4F)電源OFF
+     * DB項目名　：LEAVE_AIRCLEANER
+     * 表示する値：チェックボックス
+     * 初期表示値：空白
+     */
+    echo $this->Form->input('LEAVE_HUMID', array( 
+        'type' => 'checkbox' 
+        ,'label' => '空気清浄機(4F)電源OFF'
+        ,'default' => ''
+        ,'class' => 'leavecheck'
+    ));
+    
+    /**
      * 表示項目名：FAX・コピー確認(紙は残っていないか)
      * DB項目名　：LEAVE_FAX
      * 表示する値：チェックボックス

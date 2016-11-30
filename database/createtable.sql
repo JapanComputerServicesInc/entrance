@@ -28,6 +28,7 @@ CREATE TABLE IF NOT EXISTS `entrance_datas` (
   `LEAVE_WINDOW` char(1) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0' COMMENT '窓の施錠',
   `LEAVE_PRINTER` char(1) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0' COMMENT 'プリンタOFF',
   `LEAVE_HUMID` char(1) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0' COMMENT '加湿器OFF',
+  `LEAVE_AIRCLEANER` char(1) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0' COMMENT '空気清浄機OFF',
   `LEAVE_FAX` char(1) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0' COMMENT 'FAX・コピー確認',
   `LEAVE_AIRCON` char(1) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0' COMMENT 'エアコンOFF',
   `LEAVE_SEAIRCON` char(1) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0' COMMENT 'サーバー室エアコンON',
