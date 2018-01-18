@@ -19,7 +19,13 @@
  * @since         CakePHP(tm) v 0.2.9
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
- 
+
+// AWS SSL (ELB(443) to EC2(80)) ‘Î‰ž
+if ( isset($_SERVER['HTTP_X_FORWARDED_PORT']) &&
+        443 == $_SERVER['HTTP_X_FORWARDED_PORT'] ) {
+ Router::fullbaseUrl( 'https://'.$_SERVER['HTTP_HOST'] );
+}
+
 /**
  * Here, we are connecting '/' (base path) to controller called 'Pages',
  * its action called 'display', and we pass a param to select the view file
