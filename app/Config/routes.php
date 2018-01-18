@@ -20,7 +20,7 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-// AWS SSL (ELB(443) to EC2(80)) ‘Î‰ž
+// AWS SSL (ELB(443) to EC2(80)) å¯¾å¿œ
 if ( isset($_SERVER['HTTP_X_FORWARDED_PORT']) &&
         443 == $_SERVER['HTTP_X_FORWARDED_PORT'] ) {
  Router::fullbaseUrl( 'https://'.$_SERVER['HTTP_HOST'] );
